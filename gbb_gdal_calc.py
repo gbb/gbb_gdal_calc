@@ -206,7 +206,7 @@ def doit(opts, args):
 
         # loop through Y lines
         for Y in range(0,nYBlocks):
-            if not opts.silent: 
+            if not opts.quiet: 
               ProgressCt+=1
               if 10*ProgressCt/ProgressEnd%10!=ProgressMk:
                   ProgressMk=10*ProgressCt/ProgressEnd%10
@@ -265,7 +265,7 @@ def doit(opts, args):
 
         # end of loop through X lines
 
-    if not opts.silent: 
+    if not opts.quiet: 
       print("100 - Done")
 
     return
@@ -293,7 +293,7 @@ def main():
         "options may be listed. See format specific documentation for legal"
         "creation options for each format.")
     parser.add_option("--overwrite", dest="overwrite", action="store_true", help="overwrite output file if it already exists")
-    parser.add_option("--silent", dest="silent", action="store_true", help="if true, disables output to stdout")
+    parser.add_option("--quiet", dest="quiet", action="store_true", help="quiet - if true, disables output to stdout")
     parser.add_option("--debug", dest="debug", action="store_true", help="print debugging information")
 
     (opts, args) = parser.parse_args()
