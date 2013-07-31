@@ -206,14 +206,15 @@ def doit(opts, args):
 
         # loop through Y lines
         for Y in range(0,nYBlocks):
-            ProgressCt+=1
-            if 10*ProgressCt/ProgressEnd%10!=ProgressMk:
-                ProgressMk=10*ProgressCt/ProgressEnd%10
-                from sys import version_info
-                if version_info >= (3,0,0):
-                    exec('print("%d.." % (10*ProgressMk), end=" ")')
-                else:
-                    exec('print 10*ProgressMk, "..",')
+            if not opts.silent: 
+              ProgressCt+=1
+              if 10*ProgressCt/ProgressEnd%10!=ProgressMk:
+                  ProgressMk=10*ProgressCt/ProgressEnd%10
+                  from sys import version_info
+                  if version_info >= (3,0,0):
+                      exec('print("%d.." % (10*ProgressMk), end=" ")')
+                  else:
+                      exec('print 10*ProgressMk, "..",')
 
             # change the block size of the final piece
             if Y==nYBlocks-1:
@@ -260,8 +261,12 @@ def doit(opts, args):
             # write data block to the output file
             BandWriteArray(myOutB, myResult, xoff=myX, yoff=myY)
 
-    print("100 - Done")
-    #print("Finished - Results written to %s" %opts.outF)
+            # end of loop through Y lines 
+
+        # end of loop through X-lines
+
+    if not opts.silent: 
+      print("100 - Done")
 
     return
 
@@ -288,6 +293,7 @@ def main():
         "options may be listed. See format specific documentation for legal"
         "creation options for each format.")
     parser.add_option("--overwrite", dest="overwrite", action="store_true", help="overwrite output file if it already exists")
+    parser.add_option("--silent", dest="silent", action="store_true", help="if true, disables output to stdout")
     parser.add_option("--debug", dest="debug", action="store_true", help="print debugging information")
 
     (opts, args) = parser.parse_args()
