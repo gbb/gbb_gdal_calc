@@ -188,7 +188,7 @@ def doit(opts, args):
     # start looping through blocks of data
     ################################################################
 
-    # loop through X-lines
+    # loop through X lines
     for X in range(0,nXBlocks):
 
         # in the rare (impossible?) case that the blocks don't fit perfectly
@@ -263,7 +263,7 @@ def doit(opts, args):
 
             # end of loop through Y lines 
 
-        # end of loop through X-lines
+        # end of loop through X lines
 
     if not opts.silent: 
       print("100 - Done")
